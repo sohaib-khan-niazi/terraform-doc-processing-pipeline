@@ -1,14 +1,3 @@
-# VPC
-module "vpc" {
-  source               = "../../modules/vpc"
-  name                 = local.name
-  vpc_cidr             = "10.0.0.0/16"
-  private_subnet_cidrs = ["10.0.1.0/24"]
-  azs                  = ["us-east-1a"]
-  region               = var.aws_region
-  tags                 = local.tags
-}
-
 # S3 Module
 
 module "s3" {
@@ -48,8 +37,5 @@ module "lambda" {
   input_bucket_name   = module.s3.input_bucket_id
   output_bucket_name  = module.s3.output_bucket_id
   dynamodb_table_name = module.dynamodb.table_name
-
-  private_subnet_ids  = module.vpc.private_subnet_ids
-  security_group_id   = module.vpc.lambda_sg_id
   tags                = local.tags
 }
