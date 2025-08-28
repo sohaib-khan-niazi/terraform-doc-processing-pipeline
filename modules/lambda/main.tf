@@ -19,10 +19,10 @@ resource "aws_lambda_function" "doc_processor" {
     }
   }
 
-  # vpc_config {
-  #   subnet_ids = var.private_subnet_ids
-  #   security_group_ids = [var.security_group_id]
-  # }
+  vpc_config {
+    subnet_ids = var.private_subnet_ids
+    security_group_ids = [var.security_group_id]
+  }
   
   tags = var.tags   
 }
